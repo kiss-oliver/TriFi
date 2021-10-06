@@ -12,6 +12,6 @@ Consider a directed network with integer node IDs and directed edges stored in a
 
 - Separating is O(N+M).
 - Merge sort is O(N * log N) and O(M * log M) at worst.
-- The nested binary search will be O(N * log N * log M).
+- The nested binary search will be O(N^2/|V| * log N * log M).
 - Parallelism is obvious.
 - Depending on whether `N<M` or `M<N` the inverse of the algorithm can be run to reduce complexity of the nested binary search.
