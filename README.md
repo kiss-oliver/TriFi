@@ -14,4 +14,5 @@ Consider a directed network with integer node IDs and directed edges stored in a
 - Separating is linear O(|E|)
 - The nested binary search will be approximately O(N * d * log M * log |E|) where d is the average out-degree of a node, N is the number of edges where `u<v` and M is the number of edges where `u>v`.
 - Parallelism is obvious.
+- Since node ids are integers, interpolation search is also potentially possible. That can reduce complexity to O(N * d * log log M * log log |E|)
 - Depending on whether `N<M` or `M<N` the inverse of the algorithm can be run to reduce complexity of the nested binary search.
