@@ -57,8 +57,8 @@ def check_triangle(edge):
 def init_worker(se,ul):
     global edgelist
     global ularger
-    edgelist = neighbor_lookup('{}'.format(se))
-    ularger = neighbor_lookup('{}'.format(ul))
+    edgelist = neighbor_lookup(se)
+    ularger = neighbor_lookup(ul)
 
 with open(triangles,'w') as output:
     with open(vlarger, 'r') as input:
