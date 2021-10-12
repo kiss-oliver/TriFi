@@ -1,11 +1,10 @@
 from tqdm import tqdm
 from multiprocessing import Pool
 
-sorted_edgelist_source = 'edgelist.csv'
-ularger_source = 'ularger.csv'
-vlarger = 'vlarger.csv'
+sorted_edgelist_source = 'sorted.csv'
+vertex_source = 'vertex.csv'
 triangles = 'triangles.csv'
-cores = 112
+cores = 50
 
 from tqdm import tqdm
 from multiprocessing import Pool
@@ -45,24 +44,23 @@ class neighbor_lookup:
             result.append(line[len(string):])
         return result
 
-def check_triangle(edge):
+def check_triangle(u):
+    u = u.replace('\n','')
     tri = []
-    u, v = edge.replace('\n','').split(',')
-    X = ularger.find_neighbors(v+',')
-    for z in X:
-        if u in edgelist.find_neighbors(z+","):
-            tri.append('{},{},{}\n'.format(u, v, z))
+    W = edgelist.find_neighbors(u+',')
+    for z in W:
+        for x in edgelist.find_neighbors(z+","):
+            if x in W:
+                tri.append('{},{},{}\n'.format(u, x, z))
     return tri
 
-def init_worker(se,ul):
+def init_worker(se):
     global edgelist
-    global ularger
     edgelist = neighbor_lookup(se)
-    ularger = neighbor_lookup(ul)
 
 with open(triangles,'w') as output:
-    with open(vlarger, 'r') as input:
-        with Pool(cores, initializer=init_worker, initargs=(sorted_edgelist_source,ularger_source,)) as client:
+    with open(vertex_source, 'r') as input:
+        with Pool(cores, initializer=init_worker, initargs=(sorted_edgelist_source,)) as client:
             for tri in tqdm(client.imap_unordered(check_triangle, input)):
                 for x in tri:
                     output.write(x)
