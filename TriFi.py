@@ -4,10 +4,7 @@ from multiprocessing import Pool
 sorted_edgelist_source = 'sorted.csv'
 vertex_source = 'vertex.csv'
 triangles = 'triangles.csv'
-cores = 50
-
-from tqdm import tqdm
-from multiprocessing import Pool
+cores = 4
 
 class neighbor_lookup:
     def __init__(self, filename):
