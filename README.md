@@ -1,6 +1,16 @@
 # TriFi
 A distributed, scalable tool to find triangles in large networks
 
+## Usage
+
+Make sure that your python environment contains the packages listed in `requirements.txt`. Then run
+
+```
+. run.sh edgelist.csv
+```
+
+Where `edgelist.csv` is a headerless comma separated edgelist. To modify number of cores used edit `TriFi.py`. The current implementation relies on `sort`, `cut` and `uniq` from  GNU coreutils.
+
 ## How it works
 Consider a network with alphanumeric node IDs and edges stored in a plain text file in the `source,target` format. In any triangle between nodes A, B and C there exists a strict ordering of the IDs. Let's assign A, B and C labels such that the underlying integer IDs satisfy `id(A)<id(B)<id(C)`. To find all triangles (and all triangles only once):
 
